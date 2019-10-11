@@ -1,4 +1,4 @@
-package com.zo0okadev.movieguide.ui;
+package com.zo0okadev.movieguide.ui.movies;
 
 
 import android.os.Bundle;
