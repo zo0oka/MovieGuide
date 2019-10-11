@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MovieGuide</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="movies">Movies</string>
+    <string name="tv_shows">Tv Shows</string>
+    <string name="celebs">Celebs</string>
+    <string name="search">Search</string>
+    <string name="home_fragment">Home Fragment</string>
+    <string name="celebs_fragment">Celebs Fragment</string>
+    <string name="movies_fragment">Movies Fragment</string>
+    <string name="search_fragment">Search Fragment</string>
+    <string name="tv_shows_fragment">Tv Shows Fragment</string>
+</resources>
