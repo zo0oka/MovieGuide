@@ -30,7 +30,6 @@ public class LatestTvShowsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(LatestTvShowsViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }

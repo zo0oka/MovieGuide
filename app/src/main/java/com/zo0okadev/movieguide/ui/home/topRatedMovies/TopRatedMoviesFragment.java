@@ -30,7 +30,6 @@ public class TopRatedMoviesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(TopRatedMoviesViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }

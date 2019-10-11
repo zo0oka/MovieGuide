@@ -30,7 +30,6 @@ public class PopularCelebsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(PopularCelebsViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }
