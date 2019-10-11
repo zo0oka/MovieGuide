@@ -1,4 +1,4 @@
-package com.zo0okadev.movieguide.ui;
+package com.zo0okadev.movieguide.ui.search;
 
 
 import android.os.Bundle;
