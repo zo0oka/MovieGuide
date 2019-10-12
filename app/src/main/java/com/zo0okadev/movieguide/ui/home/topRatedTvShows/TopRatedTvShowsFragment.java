@@ -12,12 +12,12 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.zo0okadev.movieguide.R;
 
-public class TopRatedTvShows extends Fragment {
+public class TopRatedTvShowsFragment extends Fragment {
 
     private TopRatedTvShowsViewModel mViewModel;
 
-    public static TopRatedTvShows newInstance() {
-        return new TopRatedTvShows();
+    public static TopRatedTvShowsFragment newInstance() {
+        return new TopRatedTvShowsFragment();
     }
 
     @Override

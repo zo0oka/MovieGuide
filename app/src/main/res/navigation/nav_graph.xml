@@ -7,26 +7,21 @@
     <fragment
         android:id="@+id/nav_celebsFragment"
         android:name="com.zo0okadev.movieguide.ui.celebs.CelebsFragment"
-        android:label="Celebs"
         tools:layout="@layout/fragment_celebs" />
     <fragment
         android:id="@+id/nav_homeFragment"
         android:name="com.zo0okadev.movieguide.ui.home.HomeFragment"
-        android:label="Home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_moviesFragment"
         android:name="com.zo0okadev.movieguide.ui.movies.MoviesFragment"
-        android:label="Movies"
         tools:layout="@layout/fragment_movies" />
     <fragment
         android:id="@+id/nav_searchFragment"
         android:name="com.zo0okadev.movieguide.ui.search.SearchFragment"
-        android:label="Search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/nav_tvShowsFragment"
         android:name="com.zo0okadev.movieguide.ui.tvShows.TvShowsFragment"
-        android:label="TvShows"
         tools:layout="@layout/fragment_tv_shows" />
 </navigation>
