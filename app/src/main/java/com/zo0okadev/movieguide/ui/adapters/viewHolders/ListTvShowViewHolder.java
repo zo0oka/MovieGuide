@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.zo0okadev.movieguide.R;
-import com.zo0okadev.movieguide.model.ListMovie;
+import com.zo0okadev.movieguide.model.ListTvShow;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import static com.zo0okadev.movieguide.utils.Constants.IMAGE_BASE_URL;
 import static com.zo0okadev.movieguide.utils.Constants.LIST_MOVIE_POSTER_WIDTH;
 
-public class ListMovieViewHolder extends RecyclerView.ViewHolder {
+public class ListTvShowViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.item_thumbnail)
     ImageView itemThumbnail;
@@ -28,14 +28,14 @@ public class ListMovieViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.item_fav_icon)
     ImageView itemFavIcon;
 
-    public ListMovieViewHolder(@NonNull View itemView) {
+    public ListTvShowViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
 
-    public void bindTo(ListMovie listMovie) {
-        Glide.with(itemView).load(IMAGE_BASE_URL + LIST_MOVIE_POSTER_WIDTH + listMovie.getPosterPath()).into(itemThumbnail);
-        itemTitle.setText(listMovie.getTitle());
-        itemUserRating.setText(String.valueOf(listMovie.getVoteAverage()));
+    public void bindTo(ListTvShow listTvShow) {
+        Glide.with(itemView).load(IMAGE_BASE_URL + LIST_MOVIE_POSTER_WIDTH + listTvShow.getPosterPath()).into(itemThumbnail);
+        itemTitle.setText(listTvShow.getName());
+        itemUserRating.setText(String.valueOf(listTvShow.getVoteAverage()));
     }
 }

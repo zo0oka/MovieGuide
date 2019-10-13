@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zo0okadev.movieguide.R;
-import com.zo0okadev.movieguide.ui.adapters.ListMoviesPagedAdapter;
+import com.zo0okadev.movieguide.ui.adapters.MoviesPagedListAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +25,7 @@ public class PopularMoviesFragment extends Fragment {
     RecyclerView popularMoviesRecyclerView;
 
     private PopularMoviesViewModel mViewModel;
-    private ListMoviesPagedAdapter adapter;
+    private MoviesPagedListAdapter adapter;
     private Unbinder unbinder;
 
     public static PopularMoviesFragment newInstance() {
@@ -43,7 +43,7 @@ public class PopularMoviesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(PopularMoviesViewModel.class);
         unbinder = ButterKnife.bind(this, view);
-        adapter = new ListMoviesPagedAdapter();
+        adapter = new MoviesPagedListAdapter();
         popularMoviesRecyclerView.setHasFixedSize(true);
         popularMoviesRecyclerView.setAdapter(adapter);
         popularMoviesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));

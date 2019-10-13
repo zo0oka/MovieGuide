@@ -6,7 +6,7 @@ import androidx.paging.DataSource;
 import com.zo0okadev.movieguide.data.dataSources.PopularMoviesDatasource;
 import com.zo0okadev.movieguide.model.ListMovie;
 
-public class PopularMoviesDatasourceFacroty extends DataSource.Factory<Integer, ListMovie> {
+public class PopularMoviesDatasourceFactory extends DataSource.Factory<Integer, ListMovie> {
 
     @NonNull
     @Override

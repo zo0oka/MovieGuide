@@ -21,7 +21,7 @@ import static com.zo0okadev.movieguide.utils.Constants.LANGUAGE;
 
 public class PopularMoviesDatasource extends PageKeyedDataSource<Integer, ListMovie> {
 
-    private static final String TAG = TopRatedMoviesDatasource.class.getSimpleName();
+    private static final String TAG = PopularMoviesDatasource.class.getSimpleName();
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, ListMovie> callback) {
         RetrofitClient.getInstance().getPopularMovies(API_KEY, LANGUAGE, 1).enqueue(new Callback<MoviesListResonse>() {

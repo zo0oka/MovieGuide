@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
-import com.zo0okadev.movieguide.data.dataSourceFactories.PopularMoviesDatasourceFacroty;
+import com.zo0okadev.movieguide.data.dataSourceFactories.PopularMoviesDatasourceFactory;
+import com.zo0okadev.movieguide.data.dataSourceFactories.PopularTvShowsDatasourceFactory;
 import com.zo0okadev.movieguide.data.dataSourceFactories.TopRatedMoviesDatasourceFactory;
 import com.zo0okadev.movieguide.model.ListMovie;
+import com.zo0okadev.movieguide.model.ListTvShow;
 
 public class HomeRepository {
 
@@ -23,7 +25,7 @@ public class HomeRepository {
     }
 
     public LiveData<PagedList<ListMovie>> getPopularMovies() {
-        PopularMoviesDatasourceFacroty popularMoviesDatasourceFacroty = new PopularMoviesDatasourceFacroty();
+        PopularMoviesDatasourceFactory popularMoviesDatasourceFactory = new PopularMoviesDatasourceFactory();
         PagedList.Config config = new PagedList.Config.Builder()
                 .setEnablePlaceholders(true)
                 .setInitialLoadSizeHint(20)
@@ -31,7 +33,19 @@ public class HomeRepository {
                 .setPageSize(20)
                 .setPrefetchDistance(20)
                 .build();
-        return new LivePagedListBuilder<>(popularMoviesDatasourceFacroty, config).build();
+        return new LivePagedListBuilder<>(popularMoviesDatasourceFactory, config).build();
+    }
+
+    public LiveData<PagedList<ListTvShow>> getPopularTvShows() {
+        PopularTvShowsDatasourceFactory popularTvShowsDatasourceFactory = new PopularTvShowsDatasourceFactory();
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(true)
+                .setInitialLoadSizeHint(20)
+                .setMaxSize(60)
+                .setPageSize(20)
+                .setPrefetchDistance(20)
+                .build();
+        return new LivePagedListBuilder<>(popularTvShowsDatasourceFactory, config).build();
     }
 
 }
