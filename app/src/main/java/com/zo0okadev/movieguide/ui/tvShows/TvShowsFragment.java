@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,7 +25,6 @@ import com.zo0okadev.movieguide.ui.tvShows.trendingTvShows.TrendingTvShowsFragme
 import com.zo0okadev.movieguide.ui.tvShows.tvShowsGenres.TvShowsGenreFragment;
 import com.zo0okadev.movieguide.ui.tvShows.tvShowsOnTheAir.TvShowsOnTheAirFragment;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -76,19 +74,16 @@ public class TvShowsFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getChildFragmentManager());
 
-        tvShowsViewModel.getTvShowGenres().observe(this, new Observer<List<Genre>>() {
-            @Override
-            public void onChanged(List<Genre> genres) {
-                adapter.addFragment(TrendingTvShowsFragment.newInstance(), "TRENDING TV SHOWS");
-                adapter.addFragment(TvShowsAiringTodayFragment.newInstance(), "TV SHOWS AIRING TODAY");
-                adapter.addFragment(TvShowsOnTheAirFragment.newInstance(), "TV SHOWS ON THE AIR");
+        tvShowsViewModel.getTvShowGenres().observe(this, genres -> {
+            adapter.addFragment(TrendingTvShowsFragment.newInstance(), "TRENDING TV SHOWS");
+            adapter.addFragment(TvShowsAiringTodayFragment.newInstance(), "TV SHOWS AIRING TODAY");
+            adapter.addFragment(TvShowsOnTheAirFragment.newInstance(), "TV SHOWS ON THE AIR");
 
-                for (Genre genre : genres) {
-                    adapter.addFragment(TvShowsGenreFragment.newInstance(genre.getId()), genre.getName().toUpperCase());
-                }
-
-                viewPager.setAdapter(adapter);
+            for (Genre genre : genres) {
+                adapter.addFragment(TvShowsGenreFragment.newInstance(genre.getId()), genre.getName().toUpperCase());
             }
+
+            viewPager.setAdapter(adapter);
         });
     }
 }
