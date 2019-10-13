@@ -9,15 +9,28 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.zo0okadev.movieguide.R;
+import com.zo0okadev.movieguide.ui.adapters.MoviesPagedListAdapter;
+import com.zo0okadev.movieguide.ui.home.popularMovies.PopularMoviesFragment;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class UpcomingMoviesFragment extends Fragment {
 
-    private UpcomingMoviesViewModel mViewModel;
+    @BindView(R.id.upcoming_movies_recyclerView)
+    RecyclerView upcomingMoviesRecyclerView;
 
-    public static UpcomingMoviesFragment newInstance() {
-        return new UpcomingMoviesFragment();
+    private UpcomingMoviesViewModel mViewModel;
+    private MoviesPagedListAdapter adapter;
+    private Unbinder unbinder;
+
+    public static PopularMoviesFragment newInstance() {
+        return new PopularMoviesFragment();
     }
 
     @Override
@@ -27,9 +40,21 @@ public class UpcomingMoviesFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(UpcomingMoviesViewModel.class);
+        unbinder = ButterKnife.bind(this, view);
+        adapter = new MoviesPagedListAdapter();
+        upcomingMoviesRecyclerView.setHasFixedSize(true);
+        upcomingMoviesRecyclerView.setAdapter(adapter);
+        upcomingMoviesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        mViewModel.getUpcomingMovies().observe(this, listMovies -> adapter.submitList(listMovies));
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }
+

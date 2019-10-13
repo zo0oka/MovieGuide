@@ -28,6 +28,12 @@ public interface TmdbApi {
             @Query("language") String language,
             @Query("page") int page);
 
+    @GET("movie/upcoming")
+    Call<MoviesListResonse> getUpcomingMovies(
+            @Query("api_key") String apiKey,
+            @Query("language") String language,
+            @Query("page") int page);
+
     @GET("tv/popular")
     Call<TvShowsListResponse> getPopularTvShows(
             @Query("api_key") String apiKey,

@@ -6,6 +6,7 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.zo0okadev.movieguide.data.dataSourceFactories.GenreMoviesDatasourceFactory;
+import com.zo0okadev.movieguide.data.dataSourceFactories.UpcomingMoviesDatasourceFactory;
 import com.zo0okadev.movieguide.model.Genre;
 import com.zo0okadev.movieguide.model.ListMovie;
 import com.zo0okadev.movieguide.model.reponses.GenresResponse;
@@ -58,5 +59,17 @@ public class MoviesRepository {
                  .build();
          return new LivePagedListBuilder<>(genreMoviesDatasourceFactory, config).build();
      }
+
+    public LiveData<PagedList<ListMovie>> getUpcomingMovies() {
+        UpcomingMoviesDatasourceFactory upcomingMoviesDatasourceFactory = new UpcomingMoviesDatasourceFactory();
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(true)
+                .setInitialLoadSizeHint(20)
+                .setMaxSize(60)
+                .setPageSize(20)
+                .setPrefetchDistance(20)
+                .build();
+        return new LivePagedListBuilder<>(upcomingMoviesDatasourceFactory, config).build();
+    }
 
 }
