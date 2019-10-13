@@ -34,7 +34,14 @@ public class ListTvShowViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindTo(ListTvShow listTvShow) {
-        Glide.with(itemView).load(IMAGE_BASE_URL + LIST_MOVIE_POSTER_WIDTH + listTvShow.getPosterPath()).into(itemThumbnail);
+        if (listTvShow.getPosterPath() != null) {
+            Glide.with(itemView).load(IMAGE_BASE_URL + LIST_MOVIE_POSTER_WIDTH + listTvShow.getPosterPath()).into(itemThumbnail);
+        } else if (listTvShow.getBackdropPath() != null) {
+            Glide.with(itemView).load(IMAGE_BASE_URL + LIST_MOVIE_POSTER_WIDTH + listTvShow.getBackdropPath()).into(itemThumbnail);
+        } else {
+            itemThumbnail.setImageResource(R.drawable.ic_tv_shw_fallback);
+            itemThumbnail.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        }
         itemTitle.setText(listTvShow.getName());
         itemUserRating.setText(String.valueOf(listTvShow.getVoteAverage()));
     }

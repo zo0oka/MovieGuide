@@ -34,8 +34,14 @@ public class ListMovieViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindTo(ListMovie listMovie) {
-        Glide.with(itemView).load(IMAGE_BASE_URL + LIST_MOVIE_POSTER_WIDTH + listMovie.getPosterPath()).into(itemThumbnail);
-        itemTitle.setText(listMovie.getTitle());
+        if (listMovie.getPosterPath() != null) {
+            Glide.with(itemView).load(IMAGE_BASE_URL + LIST_MOVIE_POSTER_WIDTH + listMovie.getPosterPath()).into(itemThumbnail);
+        } else if (listMovie.getBackdropPath() != null) {
+            Glide.with(itemView).load(IMAGE_BASE_URL + LIST_MOVIE_POSTER_WIDTH + listMovie.getBackdropPath()).into(itemThumbnail);
+        } else {
+            itemThumbnail.setImageResource(R.drawable.ic_movies_fallback);
+            itemThumbnail.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        }        itemTitle.setText(listMovie.getTitle());
         itemUserRating.setText(String.valueOf(listMovie.getVoteAverage()));
     }
 }
