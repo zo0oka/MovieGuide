@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -17,13 +19,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.zo0okadev.movieguide.R;
+import com.zo0okadev.movieguide.model.Genre;
 import com.zo0okadev.movieguide.ui.adapters.SectionsPagerAdapter;
 import com.zo0okadev.movieguide.ui.tvShows.TvShowsAiringToday.TvShowsAiringTodayFragment;
 import com.zo0okadev.movieguide.ui.tvShows.trendingTvShows.TrendingTvShowsFragment;
-import com.zo0okadev.movieguide.ui.tvShows.tvShowsGenres.TvShowsGenresFragment;
+import com.zo0okadev.movieguide.ui.tvShows.tvShowsGenres.TvShowsGenreFragment;
 import com.zo0okadev.movieguide.ui.tvShows.tvShowsOnTheAir.TvShowsOnTheAirFragment;
-import com.zo0okadev.movieguide.utils.Tools;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -31,6 +34,7 @@ import java.util.Objects;
  */
 public class TvShowsFragment extends Fragment {
 
+    private TvShowsViewModel tvShowsViewModel;
 
     public TvShowsFragment() {
         // Required empty public constructor
@@ -41,6 +45,8 @@ public class TvShowsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tv_shows, container, false);
+
+        tvShowsViewModel = ViewModelProviders.of(this).get(TvShowsViewModel.class);
 
         initToolbar(rootView);
         initComponent(rootView);
@@ -57,7 +63,6 @@ public class TvShowsFragment extends Fragment {
     private void initToolbar(View rootView) {
         Toolbar toolbar = rootView.findViewById(R.id.tv_shows_toolbar);
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
-        Tools.setSystemBarColor(getActivity(), R.color.blue_600);
     }
 
     private void initComponent(View rootView) {
@@ -70,10 +75,20 @@ public class TvShowsFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(TvShowsGenresFragment.newInstance(), "GENRES");
-        adapter.addFragment(TrendingTvShowsFragment.newInstance(), "TRENDING TV SHOWS");
-        adapter.addFragment(TvShowsAiringTodayFragment.newInstance(), "TV SHOWS AIRING TODAY");
-        adapter.addFragment(TvShowsOnTheAirFragment.newInstance(), "TV SHOWS ON THE AIR");
-        viewPager.setAdapter(adapter);
+
+        tvShowsViewModel.getTvShowGenres().observe(this, new Observer<List<Genre>>() {
+            @Override
+            public void onChanged(List<Genre> genres) {
+                adapter.addFragment(TrendingTvShowsFragment.newInstance(), "TRENDING TV SHOWS");
+                adapter.addFragment(TvShowsAiringTodayFragment.newInstance(), "TV SHOWS AIRING TODAY");
+                adapter.addFragment(TvShowsOnTheAirFragment.newInstance(), "TV SHOWS ON THE AIR");
+
+                for (Genre genre : genres) {
+                    adapter.addFragment(TvShowsGenreFragment.newInstance(genre.getId()), genre.getName().toUpperCase());
+                }
+
+                viewPager.setAdapter(adapter);
+            }
+        });
     }
 }

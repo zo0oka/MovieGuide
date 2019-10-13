@@ -1,5 +1,6 @@
 package com.zo0okadev.movieguide.remote;
 
+import com.zo0okadev.movieguide.model.reponses.GenresResponse;
 import com.zo0okadev.movieguide.model.reponses.MoviesListResonse;
 import com.zo0okadev.movieguide.model.reponses.TvShowsListResponse;
 
@@ -32,4 +33,14 @@ public interface TmdbApi {
             @Query("api_key") String apiKey,
             @Query("language") String language,
             @Query("page") int page);
+
+    @GET("genre/movie/list")
+    Call<GenresResponse> getMovieGenres(
+            @Query("api_key") String apiKey,
+            @Query("language") String language);
+
+    @GET("genre/tv/list")
+    Call<GenresResponse> getTvShowsGenres(
+            @Query("api_key") String apiKey,
+            @Query("language") String language);
 }

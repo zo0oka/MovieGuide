@@ -12,12 +12,16 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.zo0okadev.movieguide.R;
 
-public class MovieGenresFragment extends Fragment {
+public class MovieGenreFragment extends Fragment {
 
-    private MovieGenresViewModel mViewModel;
+    private MovieGenreViewModel mViewModel;
 
-    public static MovieGenresFragment newInstance() {
-        return new MovieGenresFragment();
+    public static MovieGenreFragment newInstance(int genreId) {
+        MovieGenreFragment fragment = new MovieGenreFragment();
+        Bundle args = new Bundle();
+        args.putInt("genreId", genreId);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -29,7 +33,7 @@ public class MovieGenresFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(MovieGenresViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(MovieGenreViewModel.class);
     }
 
 }

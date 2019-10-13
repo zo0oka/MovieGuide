@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/cart_margin"
-        android:elevation="3dp"
+        android:elevation="4dp"
         card_view:cardCornerRadius="4dp">
 
         <RelativeLayout
@@ -38,11 +38,13 @@
                 android:paddingLeft="@dimen/movie_title_padding"
                 android:paddingRight="@dimen/movie_title_padding"
                 android:paddingTop="@dimen/movie_title_padding"
-                android:textColor="#797C96"
+                tools:text="Title"
+                android:textColor="@android:color/white"
                 android:textAlignment="center"
-                android:gravity="center"
+                android:layout_gravity="center"
                 android:background="@color/colorPrimary"
-                android:textSize="15sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 />
 
             <LinearLayout
@@ -55,7 +57,7 @@
 
                 <ImageView
                     app:srcCompat="@drawable/ic_rate"
-                    android:tint="@color/active"
+                    android:tint="@color/yellow_A400"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:ignore="ContentDescription" />

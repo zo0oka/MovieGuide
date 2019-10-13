@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -17,12 +18,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.zo0okadev.movieguide.R;
+import com.zo0okadev.movieguide.model.Genre;
 import com.zo0okadev.movieguide.ui.adapters.SectionsPagerAdapter;
-import com.zo0okadev.movieguide.ui.movies.movieGenres.MovieGenresFragment;
+import com.zo0okadev.movieguide.ui.movies.movieGenres.MovieGenreFragment;
 import com.zo0okadev.movieguide.ui.movies.nowPlayingMovies.NowPlayingMoviesFragment;
 import com.zo0okadev.movieguide.ui.movies.trendingMovies.TrendingMoviesFragment;
 import com.zo0okadev.movieguide.ui.movies.upcomingMovies.UpcomingMoviesFragment;
-import com.zo0okadev.movieguide.utils.Tools;
 
 import java.util.Objects;
 
@@ -31,6 +32,7 @@ import java.util.Objects;
  */
 public class MoviesFragment extends Fragment {
 
+    private MoviesViewModel viewModel;
 
     public MoviesFragment() {
         // Required empty public constructor
@@ -42,7 +44,10 @@ public class MoviesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_movies, container, false);
 
+        viewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
+
         initToolbar(rootView);
+
         initComponent(rootView);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -57,7 +62,6 @@ public class MoviesFragment extends Fragment {
     private void initToolbar(View rootView) {
         Toolbar toolbar = rootView.findViewById(R.id.movies_toolbar);
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
-        Tools.setSystemBarColor(getActivity(), R.color.blue_600);
     }
 
     private void initComponent(View rootView) {
@@ -70,10 +74,17 @@ public class MoviesFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(MovieGenresFragment.newInstance(), "GENRES");
-        adapter.addFragment(UpcomingMoviesFragment.newInstance(), "UPCOMING MOVIES");
-        adapter.addFragment(NowPlayingMoviesFragment.newInstance(), "NOW PLAYING MOVIES");
-        adapter.addFragment(TrendingMoviesFragment.newInstance(), "TRENDING MOVIES");
-        viewPager.setAdapter(adapter);
+
+        viewModel.getMovieGenres().observe(this, genres -> {
+            adapter.addFragment(UpcomingMoviesFragment.newInstance(), "UPCOMING MOVIES");
+            adapter.addFragment(NowPlayingMoviesFragment.newInstance(), "NOW PLAYING MOVIES");
+            adapter.addFragment(TrendingMoviesFragment.newInstance(), "TRENDING MOVIES");
+
+            for (Genre genre : genres) {
+                adapter.addFragment(MovieGenreFragment.newInstance(genre.getId()), genre.getName().toUpperCase());
+            }
+
+            viewPager.setAdapter(adapter);
+        });
     }
 }
