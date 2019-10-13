@@ -43,4 +43,20 @@ public interface TmdbApi {
     Call<GenresResponse> getTvShowsGenres(
             @Query("api_key") String apiKey,
             @Query("language") String language);
+
+    @GET("discover/movie")
+    Call<MoviesListResonse> getGenreMovies(
+            @Query("api_key") String apiKey,
+            @Query("language") String language,
+            @Query("sort_by") String sortBy,
+            @Query("with_genres") int genre,
+            @Query("page") int page);
+
+    @GET("discover/tv")
+    Call<TvShowsListResponse> getGenreTvShows(
+            @Query("api_key") String apiKey,
+            @Query("language") String language,
+            @Query("sort_by") String sortBy,
+            @Query("with_genres") int genre,
+            @Query("page") int page);
 }

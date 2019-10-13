@@ -2,6 +2,7 @@ package com.zo0okadev.movieguide.ui.movies;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ import java.util.Objects;
 public class MoviesFragment extends Fragment {
 
     private MoviesViewModel viewModel;
+    private static final String TAG = MoviesFragment.class.getSimpleName();
 
     public MoviesFragment() {
         // Required empty public constructor
@@ -82,8 +84,8 @@ public class MoviesFragment extends Fragment {
 
             for (Genre genre : genres) {
                 adapter.addFragment(MovieGenreFragment.newInstance(genre.getId()), genre.getName().toUpperCase());
+                Log.d(TAG, "setupViewPager: Genre ID: " + genre.getId());
             }
-
             viewPager.setAdapter(adapter);
         });
     }

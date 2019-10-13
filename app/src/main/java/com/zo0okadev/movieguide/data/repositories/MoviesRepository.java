@@ -2,8 +2,12 @@ package com.zo0okadev.movieguide.data.repositories;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.paging.LivePagedListBuilder;
+import androidx.paging.PagedList;
 
+import com.zo0okadev.movieguide.data.dataSourceFactories.GenreMoviesDatasourceFactory;
 import com.zo0okadev.movieguide.model.Genre;
+import com.zo0okadev.movieguide.model.ListMovie;
 import com.zo0okadev.movieguide.model.reponses.GenresResponse;
 import com.zo0okadev.movieguide.remote.RetrofitClient;
 
@@ -41,6 +45,18 @@ public class MoviesRepository {
              }
          });
          return genres;
+     }
+
+     public LiveData<PagedList<ListMovie>> getGenreMovies(int genreId) {
+         GenreMoviesDatasourceFactory genreMoviesDatasourceFactory = new GenreMoviesDatasourceFactory(genreId);
+         PagedList.Config config = new PagedList.Config.Builder()
+                 .setEnablePlaceholders(true)
+                 .setInitialLoadSizeHint(20)
+                 .setMaxSize(60)
+                 .setPageSize(20)
+                 .setPrefetchDistance(20)
+                 .build();
+         return new LivePagedListBuilder<>(genreMoviesDatasourceFactory, config).build();
      }
 
 }
