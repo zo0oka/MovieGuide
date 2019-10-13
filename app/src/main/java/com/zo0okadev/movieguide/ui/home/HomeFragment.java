@@ -22,7 +22,6 @@ import com.zo0okadev.movieguide.ui.home.popularMovies.PopularMoviesFragment;
 import com.zo0okadev.movieguide.ui.home.popularTvShows.PopularTvShowsFragment;
 import com.zo0okadev.movieguide.ui.home.topRatedMovies.TopRatedMoviesFragment;
 import com.zo0okadev.movieguide.ui.home.topRatedTvShows.TopRatedTvShowsFragment;
-import com.zo0okadev.movieguide.utils.Tools;
 
 import java.util.Objects;
 
@@ -55,7 +54,6 @@ public class HomeFragment extends Fragment {
     private void initToolbar(View rootView) {
         Toolbar toolbar = rootView.findViewById(R.id.home_toolbar);
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
-        Tools.setSystemBarColor(getActivity(), R.color.blue_600);
     }
 
     private void initComponent(View rootView) {

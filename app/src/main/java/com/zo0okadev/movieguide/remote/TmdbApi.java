@@ -15,6 +15,12 @@ public interface TmdbApi {
             @Query("language") String language,
             @Query("page") int page);
 
+    @GET("tv/top_rated")
+    Call<TvShowsListResponse> getTopRatedTvShows(
+            @Query("api_key") String apiKey,
+            @Query("language") String language,
+            @Query("page") int page);
+
     @GET("movie/popular")
     Call<MoviesListResonse> getPopularMovies(
             @Query("api_key") String apiKey,
