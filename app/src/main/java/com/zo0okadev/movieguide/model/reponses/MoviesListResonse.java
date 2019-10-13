@@ -6,7 +6,7 @@ import com.zo0okadev.movieguide.model.ListMovie;
 
 import java.util.List;
 
-public class TopRatedMoviesResonse {
+public class MoviesListResonse {
 
     @SerializedName("page")
     @Expose

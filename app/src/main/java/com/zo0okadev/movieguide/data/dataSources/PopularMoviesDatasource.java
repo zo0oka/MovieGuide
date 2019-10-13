@@ -19,12 +19,12 @@ import retrofit2.Response;
 import static com.zo0okadev.movieguide.utils.Constants.API_KEY;
 import static com.zo0okadev.movieguide.utils.Constants.LANGUAGE;
 
-public class TopRatedMoviesDatasource extends PageKeyedDataSource<Integer, ListMovie> {
+public class PopularMoviesDatasource extends PageKeyedDataSource<Integer, ListMovie> {
 
     private static final String TAG = TopRatedMoviesDatasource.class.getSimpleName();
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, ListMovie> callback) {
-        RetrofitClient.getInstance().getTopRatedMovies(API_KEY, LANGUAGE, 1).enqueue(new Callback<MoviesListResonse>() {
+        RetrofitClient.getInstance().getPopularMovies(API_KEY, LANGUAGE, 1).enqueue(new Callback<MoviesListResonse>() {
             @Override
             public void onResponse(Call<MoviesListResonse> call, Response<MoviesListResonse> response) {
                 if (response.isSuccessful()) {
@@ -48,7 +48,7 @@ public class TopRatedMoviesDatasource extends PageKeyedDataSource<Integer, ListM
 
     @Override
     public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, ListMovie> callback) {
-        RetrofitClient.getInstance().getTopRatedMovies(API_KEY, LANGUAGE, params.key).enqueue(new Callback<MoviesListResonse>() {
+        RetrofitClient.getInstance().getPopularMovies(API_KEY, LANGUAGE, params.key).enqueue(new Callback<MoviesListResonse>() {
             @Override
             public void onResponse(Call<MoviesListResonse> call, Response<MoviesListResonse> response) {
                 if (response.isSuccessful()) {
@@ -71,7 +71,7 @@ public class TopRatedMoviesDatasource extends PageKeyedDataSource<Integer, ListM
 
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, ListMovie> callback) {
-        RetrofitClient.getInstance().getTopRatedMovies(API_KEY, LANGUAGE, params.key).enqueue(new Callback<MoviesListResonse>() {
+        RetrofitClient.getInstance().getPopularMovies(API_KEY, LANGUAGE, params.key).enqueue(new Callback<MoviesListResonse>() {
             @Override
             public void onResponse(Call<MoviesListResonse> call, Response<MoviesListResonse> response) {
                 if (response.isSuccessful()) {
