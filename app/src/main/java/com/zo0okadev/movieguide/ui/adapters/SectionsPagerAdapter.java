@@ -1,4 +1,4 @@
-package com.zo0okadev.movieguide.ui;
+package com.zo0okadev.movieguide.ui.adapters;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

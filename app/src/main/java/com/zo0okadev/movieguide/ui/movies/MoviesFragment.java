@@ -17,7 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.zo0okadev.movieguide.R;
-import com.zo0okadev.movieguide.ui.SectionsPagerAdapter;
+import com.zo0okadev.movieguide.ui.adapters.SectionsPagerAdapter;
 import com.zo0okadev.movieguide.ui.movies.movieGenres.MovieGenresFragment;
 import com.zo0okadev.movieguide.ui.movies.nowPlayingMovies.NowPlayingMoviesFragment;
 import com.zo0okadev.movieguide.ui.movies.trendingMovies.TrendingMoviesFragment;
