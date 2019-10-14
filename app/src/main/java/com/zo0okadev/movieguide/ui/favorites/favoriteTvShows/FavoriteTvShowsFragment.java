@@ -1,4 +1,4 @@
-package com.zo0okadev.movieguide.ui.home.topRatedTvShows;
+package com.zo0okadev.movieguide.ui.favorites.favoriteTvShows;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,35 +19,35 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class TopRatedTvShowsFragment extends Fragment {
+public class FavoriteTvShowsFragment extends Fragment {
 
-    @BindView(R.id.top_rated_tv_shows_recyclerView)
-    RecyclerView topRatedTvShowsRecyclerView;
+    @BindView(R.id.favorite_tv_shows_recyclerView)
+    RecyclerView favoriteTvShowsRecyclerView;
 
-    private TopRatedTvShowsViewModel mViewModel;
-    private TvShowsPagedListAdapter adapter;
+    private FavoriteTvShowsViewModel mViewModel;
     private Unbinder unbinder;
+    private TvShowsPagedListAdapter adapter;
 
-    public static TopRatedTvShowsFragment newInstance() {
-        return new TopRatedTvShowsFragment();
+    public static FavoriteTvShowsFragment newInstance() {
+        return new FavoriteTvShowsFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.top_rated_tv_shows_fragment, container, false);
+        return inflater.inflate(R.layout.favorite_tv_shows_fragment, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(TopRatedTvShowsViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(FavoriteTvShowsViewModel.class);
         unbinder = ButterKnife.bind(this, view);
         adapter = new TvShowsPagedListAdapter(getActivity());
-        topRatedTvShowsRecyclerView.setHasFixedSize(true);
-        topRatedTvShowsRecyclerView.setAdapter(adapter);
-        topRatedTvShowsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        mViewModel.getTopRatedTvShows().observe(this, listTvShows -> adapter.submitList(listTvShows));
+        favoriteTvShowsRecyclerView.setHasFixedSize(true);
+        favoriteTvShowsRecyclerView.setAdapter(adapter);
+        favoriteTvShowsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        mViewModel.getFavoriteTvShows().observe(this, listTvShows -> adapter.submitList(listTvShows));
     }
 
     @Override

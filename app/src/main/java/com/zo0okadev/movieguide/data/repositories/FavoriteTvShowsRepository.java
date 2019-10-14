@@ -8,35 +8,35 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.zo0okadev.movieguide.db.AppDB;
-import com.zo0okadev.movieguide.db.MoviesDao;
-import com.zo0okadev.movieguide.model.ListMovie;
+import com.zo0okadev.movieguide.db.TvShowsDao;
+import com.zo0okadev.movieguide.model.ListTvShow;
 
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class FavoriteMoviesRepository {
+public class FavoriteTvShowsRepository {
 
-    private MoviesDao moviesDao;
+    private TvShowsDao tvShowsDao;
     private Executor executor;
-    private LiveData<PagedList<ListMovie>> favoriteMovies;
+    private LiveData<PagedList<ListTvShow>> favoriteTvShows;
 
-    public FavoriteMoviesRepository(Application application) {
+    public FavoriteTvShowsRepository(Application application) {
         AppDB db = AppDB.getInstance(application);
-        moviesDao = db.moviesDao();
+        tvShowsDao = db.tvShowsDao();
         executor = Executors.newFixedThreadPool(5);
     }
 
-    public void insertFavoriteMovie(ListMovie movie) {
-        executor.execute(() -> moviesDao.insert(movie));
+    public void insertFavoriteTvShow(ListTvShow tvShow) {
+        executor.execute(() -> tvShowsDao.insert(tvShow));
     }
 
-    public void deleteFavoriteMovie(int id) {
-        executor.execute(() -> moviesDao.deleteFavoriteMovie(id));
+    public void deleteFavoriteTvShow(int id) {
+        executor.execute(() -> tvShowsDao.deleteFavoriteTvShow(id));
     }
 
-    public LiveData<PagedList<ListMovie>> getFavoriteMovies() {
-        DataSource.Factory<Integer, ListMovie> factory = moviesDao.getFavoriteMovies();
+    public LiveData<PagedList<ListTvShow>> getFavoriteTvShows() {
+        DataSource.Factory<Integer, ListTvShow> factory = tvShowsDao.getFavoriteTvShows();
         PagedList.Config config = new PagedList.Config.Builder()
                 .setEnablePlaceholders(true)
                 .setInitialLoadSizeHint(20)
@@ -47,7 +47,7 @@ public class FavoriteMoviesRepository {
         return new LivePagedListBuilder<>(factory, config).build();
     }
 
-    public LiveData<List<ListMovie>> isFavorite(int id) {
-        return moviesDao.isFavorite(id);
+    public LiveData<List<ListTvShow>> isFavorite(int id) {
+        return tvShowsDao.isFavorite(id);
     }
 }

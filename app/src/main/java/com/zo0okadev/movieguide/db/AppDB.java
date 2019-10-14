@@ -9,8 +9,9 @@ import androidx.room.TypeConverters;
 
 import com.zo0okadev.movieguide.model.Genre;
 import com.zo0okadev.movieguide.model.ListMovie;
+import com.zo0okadev.movieguide.model.ListTvShow;
 
-@Database(entities = {Genre.class, ListMovie.class}, version = 2, exportSchema = false)
+@Database(entities = {Genre.class, ListMovie.class, ListTvShow.class}, version = 3, exportSchema = false)
 @TypeConverters({com.zo0okadev.movieguide.db.TypeConverters.class})
 public abstract class AppDB extends RoomDatabase {
 
@@ -37,4 +38,5 @@ public abstract class AppDB extends RoomDatabase {
 
     public abstract GenreDao genreDao();
     public abstract MoviesDao moviesDao();
+    public abstract TvShowsDao tvShowsDao();
 }

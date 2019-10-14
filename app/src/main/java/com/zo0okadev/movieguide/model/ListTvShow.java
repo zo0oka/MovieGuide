@@ -2,12 +2,15 @@ package com.zo0okadev.movieguide.model;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@Entity(tableName = "favorite_tv_shows")
 public class ListTvShow {
 
     public static final DiffUtil.ItemCallback<ListTvShow> DIFF_CALLBACK = new DiffUtil.ItemCallback<ListTvShow>() {
@@ -49,6 +52,7 @@ public class ListTvShow {
     @SerializedName("original_language")
     @Expose
     private String originalLanguage;
+    @PrimaryKey
     @SerializedName("id")
     @Expose
     private Integer id;

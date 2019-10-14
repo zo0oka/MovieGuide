@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.zo0okadev.movieguide.R;
 import com.zo0okadev.movieguide.model.ListMovie;
-import com.zo0okadev.movieguide.ui.favorites.FavoriteMoviesViewModel;
+import com.zo0okadev.movieguide.ui.favorites.favoriteMovies.FavoriteMoviesViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,6 +1,7 @@
 package com.zo0okadev.movieguide.db;
 
 import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -17,7 +18,7 @@ public interface MoviesDao {
     void insert(ListMovie movie);
 
     @Query("SELECT * FROM favorite_movies")
-    LiveData<List<ListMovie>> getFavoriteMovies();
+    DataSource.Factory<Integer, ListMovie> getFavoriteMovies();
 
     @Query("DELETE FROM favorite_movies WHERE id = :id")
     void deleteFavoriteMovie(int id);

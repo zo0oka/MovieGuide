@@ -49,7 +49,7 @@ public class TvShowsGenreFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(TvShowsGenreViewModel.class);
         unbinder = ButterKnife.bind(this, view);
-        adapter = new TvShowsPagedListAdapter();
+        adapter = new TvShowsPagedListAdapter(getActivity());
         genreTvShowsRecyclerView.setHasFixedSize(true);
         genreTvShowsRecyclerView.setAdapter(adapter);
         genreTvShowsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));

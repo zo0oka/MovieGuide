@@ -43,7 +43,7 @@ public class PopularTvShowsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(PopularTvShowsViewModel.class);
         unbinder = ButterKnife.bind(this, view);
-        adapter = new TvShowsPagedListAdapter();
+        adapter = new TvShowsPagedListAdapter(getActivity());
         popularTvShowsRecyclerView.setHasFixedSize(true);
         popularTvShowsRecyclerView.setAdapter(adapter);
         popularTvShowsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));

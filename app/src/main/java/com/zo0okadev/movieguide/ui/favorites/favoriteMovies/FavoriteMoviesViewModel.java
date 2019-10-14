@@ -1,10 +1,11 @@
-package com.zo0okadev.movieguide.ui.favorites;
+package com.zo0okadev.movieguide.ui.favorites.favoriteMovies;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.paging.PagedList;
 
 import com.zo0okadev.movieguide.data.repositories.FavoriteMoviesRepository;
 import com.zo0okadev.movieguide.model.ListMovie;
@@ -14,7 +15,7 @@ import java.util.List;
 public class FavoriteMoviesViewModel extends AndroidViewModel {
 
     private FavoriteMoviesRepository favoriteMoviesRepository;
-    private LiveData<List<ListMovie>> favoriteMovies;
+    private LiveData<PagedList<ListMovie>> favoriteMovies;
 
     public FavoriteMoviesViewModel(@NonNull Application application) {
         super(application);
@@ -22,7 +23,7 @@ public class FavoriteMoviesViewModel extends AndroidViewModel {
         favoriteMovies = favoriteMoviesRepository.getFavoriteMovies();
     }
 
-    public LiveData<List<ListMovie>> getFavoriteMovies() {
+    public LiveData<PagedList<ListMovie>> getFavoriteMovies() {
         return favoriteMovies;
     }
 

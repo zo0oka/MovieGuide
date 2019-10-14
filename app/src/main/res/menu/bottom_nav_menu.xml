@@ -22,8 +22,8 @@
         android:title="@string/celebs" />
 
     <item
-        android:id="@+id/nav_searchFragment"
-        android:icon="@drawable/ic_search_black_24dp"
-        android:title="@string/search" />
+        android:id="@+id/nav_favoritesFragment"
+        android:icon="@drawable/ic_favorite_border_black_24dp"
+        android:title="@string/favorites" />
 
 </menu>

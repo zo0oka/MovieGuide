@@ -1,4 +1,4 @@
-package com.zo0okadev.movieguide.ui.favorites;
+package com.zo0okadev.movieguide.ui.favorites.favoriteMovies;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -47,7 +47,7 @@ public class FavoriteMoviesFragment extends Fragment {
         favoriteMoviesRecyclerView.setHasFixedSize(true);
         favoriteMoviesRecyclerView.setAdapter(adapter);
         favoriteMoviesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-//        mViewModel.getFavoriteMovies().observe(this, listMovies -> adapter.submitList(listMovies));
+        mViewModel.getFavoriteMovies().observe(this, listMovies -> adapter.submitList(listMovies));
     }
 
     @Override
