@@ -1,5 +1,8 @@
 package com.zo0okadev.movieguide.remote;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -25,13 +28,17 @@ public class RetrofitClient {
                     .addInterceptor(loggingInterceptor)
                     .build();
 
+            Gson gson = new GsonBuilder()
+                    .excludeFieldsWithoutExposeAnnotation()
+                    .create();
+
             // Retrofit Builder
             Retrofit.Builder builder =
                     new Retrofit
                             .Builder()
                             .baseUrl(API_BASE_URL)
                             .client(client)
-                            .addConverterFactory(GsonConverterFactory.create());
+                            .addConverterFactory(GsonConverterFactory.create(gson));
 
             tmdbApi = builder.build().create(TmdbApi.class);
         }

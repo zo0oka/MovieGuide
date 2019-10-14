@@ -1,18 +1,22 @@
 package com.zo0okadev.movieguide.data.repositories;
 
+import android.app.Application;
+
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.zo0okadev.movieguide.data.dataSourceFactories.GenreTvShowDatasourceFactory;
+import com.zo0okadev.movieguide.db.AppDB;
+import com.zo0okadev.movieguide.db.GenreDao;
 import com.zo0okadev.movieguide.model.Genre;
 import com.zo0okadev.movieguide.model.ListTvShow;
 import com.zo0okadev.movieguide.model.reponses.GenresResponse;
 import com.zo0okadev.movieguide.remote.RetrofitClient;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,19 +27,34 @@ import static com.zo0okadev.movieguide.utils.Constants.LANGUAGE;
 
 public class TvShowsRepository {
 
-    public LiveData<List<Genre>> getTvShowGenres() {
-        MutableLiveData<List<Genre>> genres = new MutableLiveData<>();
+    private GenreDao genreDao;
+    private LiveData<List<Genre>> tvshowGenres;
+    private Executor executor;
+
+    public TvShowsRepository(Application application) {
+        AppDB db = AppDB.getInstance(application);
+        genreDao = db.genreDao();
+        tvshowGenres = genreDao.getTvShowGenres();
+        executor = Executors.newFixedThreadPool(5);
+    }
+
+    public void loadTvShowGenres() {
         RetrofitClient.getInstance().getTvShowsGenres(API_KEY, LANGUAGE).enqueue(new Callback<GenresResponse>() {
             @Override
             public void onResponse(Call<GenresResponse> call, Response<GenresResponse> response) {
                 if (response.isSuccessful()) {
-                    List<Genre> genreList;
                     if (response.body() != null) {
-                        genreList = response.body().getGenres();
-                    } else {
-                        genreList = Collections.emptyList();
+                        List<Genre> genres = response.body().getGenres();
+                        for (Genre genre : genres) {
+                            genre.setType("tvShow");
+                        }
+                        executor.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                genreDao.insertGenres(genres);
+                            }
+                        });
                     }
-                    genres.postValue(genreList);
                 }
             }
 
@@ -44,7 +63,10 @@ public class TvShowsRepository {
 
             }
         });
-        return genres;
+    }
+
+    public LiveData<List<Genre>> getTvshowGenres() {
+        return tvshowGenres;
     }
 
     public LiveData<PagedList<ListTvShow>> getGenreTvShows(int genreId) {

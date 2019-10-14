@@ -79,6 +79,7 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:tint="#ffffff"
+                    android:tag="not_bookmarked"
                     app:srcCompat="@drawable/ic_favorite_border_black_24dp"
                     tools:ignore="ContentDescription" />
             </LinearLayout>

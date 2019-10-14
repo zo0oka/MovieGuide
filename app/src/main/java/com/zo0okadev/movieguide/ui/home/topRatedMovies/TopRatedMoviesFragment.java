@@ -43,7 +43,7 @@ public class TopRatedMoviesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(TopRatedMoviesViewModel.class);
         unbinder = ButterKnife.bind(this, view);
-        adapter = new MoviesPagedListAdapter();
+        adapter = new MoviesPagedListAdapter(getActivity());
         topRatedMoviesRecyclerView.setHasFixedSize(true);
         topRatedMoviesRecyclerView.setAdapter(adapter);
         topRatedMoviesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));

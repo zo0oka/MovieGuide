@@ -2,12 +2,15 @@ package com.zo0okadev.movieguide.model;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@Entity(tableName = "favorite_movies")
 public class ListMovie {
 
     public static final DiffUtil.ItemCallback<ListMovie> DIFF_CALLBACK = new DiffUtil.ItemCallback<ListMovie>() {
@@ -34,6 +37,7 @@ public class ListMovie {
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
+    @PrimaryKey
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -64,6 +68,23 @@ public class ListMovie {
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
+
+    public ListMovie(Double popularity, Integer voteCount, Boolean video, String posterPath, Integer id, Boolean adult, String backdropPath, String originalLanguage, String originalTitle, List<Integer> genreIds, String title, Double voteAverage, String overview, String releaseDate) {
+        this.popularity = popularity;
+        this.voteCount = voteCount;
+        this.video = video;
+        this.posterPath = posterPath;
+        this.id = id;
+        this.adult = adult;
+        this.backdropPath = backdropPath;
+        this.originalLanguage = originalLanguage;
+        this.originalTitle = originalTitle;
+        this.genreIds = genreIds;
+        this.title = title;
+        this.voteAverage = voteAverage;
+        this.overview = overview;
+        this.releaseDate = releaseDate;
+    }
 
     public Double getPopularity() {
         return popularity;

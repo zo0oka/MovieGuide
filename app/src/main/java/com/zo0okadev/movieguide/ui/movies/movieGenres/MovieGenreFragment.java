@@ -52,7 +52,7 @@ public class MovieGenreFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(MovieGenreViewModel.class);
         unbinder = ButterKnife.bind(this, view);
-        adapter = new MoviesPagedListAdapter();
+        adapter = new MoviesPagedListAdapter(getActivity());
         genreMoviesRecyclerView.setHasFixedSize(true);
         genreMoviesRecyclerView.setAdapter(adapter);
         genreMoviesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
