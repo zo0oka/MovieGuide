@@ -9,6 +9,7 @@ import androidx.paging.PagedList;
 import com.zo0okadev.movieguide.data.dataSourceFactories.GenreTvShowDatasourceFactory;
 import com.zo0okadev.movieguide.data.dataSourceFactories.TrendingtvShowsDatasourceFactory;
 import com.zo0okadev.movieguide.data.dataSourceFactories.TvShowsAiringTodayDatasourceFactory;
+import com.zo0okadev.movieguide.data.dataSourceFactories.TvShowsOnTheAirDatasourceFactory;
 import com.zo0okadev.movieguide.db.AppDB;
 import com.zo0okadev.movieguide.db.GenreDao;
 import com.zo0okadev.movieguide.model.Genre;
@@ -82,6 +83,18 @@ public class TvShowsRepository {
                 .setPrefetchDistance(20)
                 .build();
         return new LivePagedListBuilder<>(genreTvShowDatasourceFactory, config).build();
+    }
+
+    public LiveData<PagedList<ListTvShow>> getTvShowsOnTheAir() {
+        TvShowsOnTheAirDatasourceFactory tvShowsOnTheAirDatasourceFactory = new TvShowsOnTheAirDatasourceFactory();
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(true)
+                .setInitialLoadSizeHint(20)
+                .setMaxSize(60)
+                .setPageSize(20)
+                .setPrefetchDistance(20)
+                .build();
+        return new LivePagedListBuilder<>(tvShowsOnTheAirDatasourceFactory, config).build();
     }
 
     public LiveData<PagedList<TrendingTvShow>> getTrendingtvShows() {
