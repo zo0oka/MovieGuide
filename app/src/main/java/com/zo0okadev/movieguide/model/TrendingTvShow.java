@@ -1,11 +1,26 @@
 package com.zo0okadev.movieguide.model;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class TrendingTvShow {
+
+    public static final DiffUtil.ItemCallback<TrendingTvShow> DIFF_CALLBACK = new DiffUtil.ItemCallback<TrendingTvShow>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull TrendingTvShow oldItem, @NonNull TrendingTvShow newItem) {
+            return newItem.getId().equals(oldItem.getId());
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull TrendingTvShow oldItem, @NonNull TrendingTvShow newItem) {
+            return newItem.getName().equals(oldItem.getName());
+        }
+    };
 
     @SerializedName("original_name")
     @Expose
@@ -21,7 +36,7 @@ public class TrendingTvShow {
     private Integer voteCount;
     @SerializedName("vote_average")
     @Expose
-    private Integer voteAverage;
+    private Double voteAverage;
     @SerializedName("first_air_date")
     @Expose
     private String firstAirDate;
@@ -82,11 +97,11 @@ public class TrendingTvShow {
         this.voteCount = voteCount;
     }
 
-    public Integer getVoteAverage() {
+    public Double getVoteAverage() {
         return voteAverage;
     }
 
-    public void setVoteAverage(Integer voteAverage) {
+    public void setVoteAverage(Double voteAverage) {
         this.voteAverage = voteAverage;
     }
 

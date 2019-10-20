@@ -45,7 +45,6 @@ public class TrendingMovieViewHolder extends RecyclerView.ViewHolder {
         viewModel.isFavorite(trendingMovie.getId()).observe(activity, listMovies -> {
             Log.d("Favorites", "Favorites: " + listMovies.size());
             if (listMovies.size() > 0) {
-                Log.d("Favorites", "Index of movie: " + listMovies.indexOf(trendingMovie));
                 Log.d("Favorites", trendingMovie.getTitle() + " is bookmarked!");
                 itemFavIcon.setImageResource(R.drawable.ic_favorite);
                 itemFavIcon.setTag("bookmarked");

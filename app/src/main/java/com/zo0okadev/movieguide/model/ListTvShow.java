@@ -66,6 +66,22 @@ public class ListTvShow {
     @Expose
     private String posterPath;
 
+    public ListTvShow(String originalName, List<Integer> genreIds, String name, Double popularity, List<String> originCountry, Integer voteCount, String firstAirDate, String backdropPath, String originalLanguage, Integer id, Double voteAverage, String overview, String posterPath) {
+        this.originalName = originalName;
+        this.genreIds = genreIds;
+        this.name = name;
+        this.popularity = popularity;
+        this.originCountry = originCountry;
+        this.voteCount = voteCount;
+        this.firstAirDate = firstAirDate;
+        this.backdropPath = backdropPath;
+        this.originalLanguage = originalLanguage;
+        this.id = id;
+        this.voteAverage = voteAverage;
+        this.overview = overview;
+        this.posterPath = posterPath;
+    }
+
     public String getOriginalName() {
         return originalName;
     }
