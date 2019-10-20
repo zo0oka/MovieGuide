@@ -1,4 +1,4 @@
-package com.zo0okadev.movieguide.ui.movies.upcomingMovies;
+package com.zo0okadev.movieguide.ui.home.nowPlayingMovies;
 
 import android.app.Application;
 
@@ -9,18 +9,18 @@ import androidx.paging.PagedList;
 import com.zo0okadev.movieguide.data.repositories.MoviesRepository;
 import com.zo0okadev.movieguide.model.ListMovie;
 
-public class UpcomingMoviesViewModel extends AndroidViewModel {
+public class NowPlayingMoviesViewModel extends AndroidViewModel {
 
     private MoviesRepository moviesRepository;
-    private LiveData<PagedList<ListMovie>> upcomingMovies;
+    private LiveData<PagedList<ListMovie>> nowPlayingMovies;
 
-    public UpcomingMoviesViewModel(Application application) {
+    public NowPlayingMoviesViewModel(Application application) {
         super(application);
         moviesRepository = new MoviesRepository(application);
-        upcomingMovies = moviesRepository.getUpcomingMovies();
+        nowPlayingMovies = moviesRepository.getNowPlayingMovies();
     }
 
-    public LiveData<PagedList<ListMovie>> getUpcomingMovies() {
-        return upcomingMovies;
+    public LiveData<PagedList<ListMovie>> getNowPlayingMovies() {
+        return nowPlayingMovies;
     }
 }

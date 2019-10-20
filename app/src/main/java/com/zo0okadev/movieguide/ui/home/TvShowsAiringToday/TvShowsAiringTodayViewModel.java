@@ -1,4 +1,4 @@
-package com.zo0okadev.movieguide.ui.tvShows.TvShowsAiringToday;
+package com.zo0okadev.movieguide.ui.home.TvShowsAiringToday;
 
 import androidx.lifecycle.ViewModel;
 

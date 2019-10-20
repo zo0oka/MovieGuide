@@ -1,4 +1,4 @@
-package com.zo0okadev.movieguide.ui.movies.upcomingMovies;
+package com.zo0okadev.movieguide.ui.home.nowPlayingMovies;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,41 +14,40 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.zo0okadev.movieguide.R;
 import com.zo0okadev.movieguide.ui.adapters.MoviesPagedListAdapter;
-import com.zo0okadev.movieguide.ui.home.popularMovies.PopularMoviesFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class UpcomingMoviesFragment extends Fragment {
+public class NowPlayingMoviesFragment extends Fragment {
 
-    @BindView(R.id.upcoming_movies_recyclerView)
-    RecyclerView upcomingMoviesRecyclerView;
+    @BindView(R.id.now_playing_movies_recyclerView)
+    RecyclerView nowPlayingMoviesRecyclerView;
 
-    private UpcomingMoviesViewModel mViewModel;
+    private NowPlayingMoviesViewModel mViewModel;
     private MoviesPagedListAdapter adapter;
     private Unbinder unbinder;
 
-    public static PopularMoviesFragment newInstance() {
-        return new PopularMoviesFragment();
+    public static NowPlayingMoviesFragment newInstance() {
+        return new NowPlayingMoviesFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.upcoming_movies_fragment, container, false);
+        return inflater.inflate(R.layout.now_playing_movies_fragment, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(UpcomingMoviesViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(NowPlayingMoviesViewModel.class);
         unbinder = ButterKnife.bind(this, view);
         adapter = new MoviesPagedListAdapter(getActivity());
-        upcomingMoviesRecyclerView.setHasFixedSize(true);
-        upcomingMoviesRecyclerView.setAdapter(adapter);
-        upcomingMoviesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        mViewModel.getUpcomingMovies().observe(this, listMovies -> adapter.submitList(listMovies));
+        nowPlayingMoviesRecyclerView.setHasFixedSize(true);
+        nowPlayingMoviesRecyclerView.setAdapter(adapter);
+        nowPlayingMoviesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        mViewModel.getNowPlayingMovies().observe(this, listMovies -> adapter.submitList(listMovies));
     }
 
     @Override
@@ -57,4 +56,3 @@ public class UpcomingMoviesFragment extends Fragment {
         unbinder.unbind();
     }
 }
-

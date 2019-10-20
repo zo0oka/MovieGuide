@@ -22,9 +22,6 @@ import com.zo0okadev.movieguide.R;
 import com.zo0okadev.movieguide.model.Genre;
 import com.zo0okadev.movieguide.ui.adapters.SectionsPagerAdapter;
 import com.zo0okadev.movieguide.ui.movies.movieGenres.MovieGenreFragment;
-import com.zo0okadev.movieguide.ui.movies.nowPlayingMovies.NowPlayingMoviesFragment;
-import com.zo0okadev.movieguide.ui.movies.trendingMovies.TrendingMoviesFragment;
-import com.zo0okadev.movieguide.ui.movies.upcomingMovies.UpcomingMoviesFragment;
 
 import java.util.Objects;
 
@@ -78,10 +75,6 @@ public class MoviesFragment extends Fragment {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getChildFragmentManager());
 
         viewModel.getMovieGenres().observe(this, genres -> {
-            adapter.addFragment(UpcomingMoviesFragment.newInstance(), "UPCOMING MOVIES");
-            adapter.addFragment(NowPlayingMoviesFragment.newInstance(), "NOW PLAYING MOVIES");
-            adapter.addFragment(TrendingMoviesFragment.newInstance(), "TRENDING MOVIES");
-
             for (Genre genre : genres) {
                 adapter.addFragment(MovieGenreFragment.newInstance(genre.getId()), genre.getName().toUpperCase());
                 Log.d(TAG, "setupViewPager: Genre ID: " + genre.getId());

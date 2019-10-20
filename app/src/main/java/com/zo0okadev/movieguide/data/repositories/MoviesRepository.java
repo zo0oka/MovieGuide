@@ -7,6 +7,7 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.zo0okadev.movieguide.data.dataSourceFactories.GenreMoviesDatasourceFactory;
+import com.zo0okadev.movieguide.data.dataSourceFactories.NowPlayingMoviesDatasourceFactory;
 import com.zo0okadev.movieguide.data.dataSourceFactories.UpcomingMoviesDatasourceFactory;
 import com.zo0okadev.movieguide.db.AppDB;
 import com.zo0okadev.movieguide.db.GenreDao;
@@ -44,63 +45,51 @@ public class MoviesRepository {
     }
 
     public void loadMovieGenres() {
-            RetrofitClient.getInstance().getMovieGenres(API_KEY, LANGUAGE)
-                    .enqueue(new Callback<GenresResponse>() {
-                        @Override
-                        public void onResponse(Call<GenresResponse> call, Response<GenresResponse> response) {
-                            if (response.isSuccessful()) {
-                                if (response.body() != null) {
-                                    List<Genre> genreList = response.body().getGenres();
-                                    for (Genre genre : genreList) {
-                                        genre.setType("movie");
-                                    }
-                                    executor.execute(() -> genreDao.insertGenres(genreList));
+        RetrofitClient.getInstance().getMovieGenres(API_KEY, LANGUAGE)
+                .enqueue(new Callback<GenresResponse>() {
+                    @Override
+                    public void onResponse(Call<GenresResponse> call, Response<GenresResponse> response) {
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
+                                List<Genre> genreList = response.body().getGenres();
+                                for (Genre genre : genreList) {
+                                    genre.setType("movie");
                                 }
+                                executor.execute(() -> genreDao.insertGenres(genreList));
                             }
                         }
+                    }
 
-                        @Override
-                        public void onFailure(Call<GenresResponse> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<GenresResponse> call, Throwable t) {
 
-                        }
-                    });
-        }
+                    }
+                });
+    }
 
-//     public LiveData<List<Genre>> getMovieGenres() {
-//         MutableLiveData<List<Genre>> genres = new MutableLiveData<>();
-//         RetrofitClient.getInstance().getMovieGenres(API_KEY, LANGUAGE).enqueue(new Callback<GenresResponse>() {
-//             @Override
-//             public void onResponse(Call<GenresResponse> call, Response<GenresResponse> response) {
-//                 if (response.isSuccessful()) {
-//                     List<Genre> genreList;
-//                     if (response.body() != null) {
-//                         genreList = response.body().getGenres();
-//                     } else {
-//                         genreList = Collections.emptyList();
-//                     }
-//                     genres.postValue(genreList);
-//                 }
-//             }
-//
-//             @Override
-//             public void onFailure(Call<GenresResponse> call, Throwable t) {
-//
-//             }
-//         });
-//         return genres;
-//     }
+    public LiveData<PagedList<ListMovie>> getNowPlayingMovies() {
+        NowPlayingMoviesDatasourceFactory nowPlayingMoviesDatasourceFactory = new NowPlayingMoviesDatasourceFactory();
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(true)
+                .setInitialLoadSizeHint(20)
+                .setMaxSize(60)
+                .setPageSize(20)
+                .setPrefetchDistance(20)
+                .build();
+        return new LivePagedListBuilder<>(nowPlayingMoviesDatasourceFactory, config).build();
+    }
 
-     public LiveData<PagedList<ListMovie>> getGenreMovies(int genreId) {
-         GenreMoviesDatasourceFactory genreMoviesDatasourceFactory = new GenreMoviesDatasourceFactory(genreId);
-         PagedList.Config config = new PagedList.Config.Builder()
-                 .setEnablePlaceholders(true)
-                 .setInitialLoadSizeHint(20)
-                 .setMaxSize(60)
-                 .setPageSize(20)
-                 .setPrefetchDistance(20)
-                 .build();
-         return new LivePagedListBuilder<>(genreMoviesDatasourceFactory, config).build();
-     }
+    public LiveData<PagedList<ListMovie>> getGenreMovies(int genreId) {
+        GenreMoviesDatasourceFactory genreMoviesDatasourceFactory = new GenreMoviesDatasourceFactory(genreId);
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(true)
+                .setInitialLoadSizeHint(20)
+                .setMaxSize(60)
+                .setPageSize(20)
+                .setPrefetchDistance(20)
+                .build();
+        return new LivePagedListBuilder<>(genreMoviesDatasourceFactory, config).build();
+    }
 
     public LiveData<PagedList<ListMovie>> getUpcomingMovies() {
         UpcomingMoviesDatasourceFactory upcomingMoviesDatasourceFactory = new UpcomingMoviesDatasourceFactory();

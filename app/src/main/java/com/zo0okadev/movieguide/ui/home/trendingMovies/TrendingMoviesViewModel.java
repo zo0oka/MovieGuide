@@ -1,4 +1,4 @@
-package com.zo0okadev.movieguide.ui.movies.trendingMovies;
+package com.zo0okadev.movieguide.ui.home.trendingMovies;
 
 import androidx.lifecycle.ViewModel;
 

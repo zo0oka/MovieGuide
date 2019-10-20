@@ -18,13 +18,17 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.zo0okadev.movieguide.R;
 import com.zo0okadev.movieguide.ui.adapters.SectionsPagerAdapter;
+import com.zo0okadev.movieguide.ui.home.TvShowsAiringToday.TvShowsAiringTodayFragment;
+import com.zo0okadev.movieguide.ui.home.nowPlayingMovies.NowPlayingMoviesFragment;
 import com.zo0okadev.movieguide.ui.home.popularMovies.PopularMoviesFragment;
 import com.zo0okadev.movieguide.ui.home.popularTvShows.PopularTvShowsFragment;
 import com.zo0okadev.movieguide.ui.home.topRatedMovies.TopRatedMoviesFragment;
 import com.zo0okadev.movieguide.ui.home.topRatedTvShows.TopRatedTvShowsFragment;
+import com.zo0okadev.movieguide.ui.home.trendingTvShows.TrendingTvShowsFragment;
+import com.zo0okadev.movieguide.ui.home.tvShowsOnTheAir.TvShowsOnTheAirFragment;
+import com.zo0okadev.movieguide.ui.home.upcomingMovies.UpcomingMoviesFragment;
 
 import java.util.Objects;
-
 
 public class HomeFragment extends Fragment {
 
@@ -70,6 +74,12 @@ public class HomeFragment extends Fragment {
         adapter.addFragment(PopularTvShowsFragment.newInstance(), "POPULAR TV SHOWS");
         adapter.addFragment(TopRatedMoviesFragment.newInstance(), "TOP RATED MOVIES");
         adapter.addFragment(TopRatedTvShowsFragment.newInstance(), "TOP RATED TV SHOWS");
+        adapter.addFragment(NowPlayingMoviesFragment.newInstance(), "NOW PLAYING MOVIES");
+        adapter.addFragment(TvShowsAiringTodayFragment.newInstance(), "TV SHOWS AIRING TODAY");
+        adapter.addFragment(TopRatedMoviesFragment.newInstance(), "TRENDING MOVIES");
+        adapter.addFragment(TrendingTvShowsFragment.newInstance(), "TRENDING TV SHOWS");
+        adapter.addFragment(UpcomingMoviesFragment.newInstance(), "UPCOMING MOVIES");
+        adapter.addFragment(TvShowsOnTheAirFragment.newInstance(), "TV SHOWS ON THE AIR");
         viewPager.setAdapter(adapter);
     }
 }

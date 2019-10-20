@@ -1,4 +1,4 @@
-package com.zo0okadev.movieguide.ui.tvShows.trendingTvShows;
+package com.zo0okadev.movieguide.ui.home.trendingTvShows;
 
 import androidx.lifecycle.ViewModel;
 

@@ -1,4 +1,4 @@
-package com.zo0okadev.movieguide.ui.tvShows.trendingTvShows;
+package com.zo0okadev.movieguide.ui.home.TvShowsAiringToday;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,24 +12,24 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.zo0okadev.movieguide.R;
 
-public class TrendingTvShowsFragment extends Fragment {
+public class TvShowsAiringTodayFragment extends Fragment {
 
-    private TrendingTvShowsViewModel mViewModel;
+    private TvShowsAiringTodayViewModel mViewModel;
 
-    public static TrendingTvShowsFragment newInstance() {
-        return new TrendingTvShowsFragment();
+    public static TvShowsAiringTodayFragment newInstance() {
+        return new TvShowsAiringTodayFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.trending_tv_shows_fragment, container, false);
+        return inflater.inflate(R.layout.tv_shows_airing_today_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(TrendingTvShowsViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(TvShowsAiringTodayViewModel.class);
     }
 
 }
