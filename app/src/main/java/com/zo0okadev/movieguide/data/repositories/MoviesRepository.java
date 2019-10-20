@@ -8,11 +8,13 @@ import androidx.paging.PagedList;
 
 import com.zo0okadev.movieguide.data.dataSourceFactories.GenreMoviesDatasourceFactory;
 import com.zo0okadev.movieguide.data.dataSourceFactories.NowPlayingMoviesDatasourceFactory;
+import com.zo0okadev.movieguide.data.dataSourceFactories.TrendingMoviesDatasourceFactory;
 import com.zo0okadev.movieguide.data.dataSourceFactories.UpcomingMoviesDatasourceFactory;
 import com.zo0okadev.movieguide.db.AppDB;
 import com.zo0okadev.movieguide.db.GenreDao;
 import com.zo0okadev.movieguide.model.Genre;
 import com.zo0okadev.movieguide.model.ListMovie;
+import com.zo0okadev.movieguide.model.TrendingMovie;
 import com.zo0okadev.movieguide.model.reponses.GenresResponse;
 import com.zo0okadev.movieguide.remote.RetrofitClient;
 
@@ -77,6 +79,18 @@ public class MoviesRepository {
                 .setPrefetchDistance(20)
                 .build();
         return new LivePagedListBuilder<>(nowPlayingMoviesDatasourceFactory, config).build();
+    }
+
+    public LiveData<PagedList<TrendingMovie>> getTrendingMovies() {
+        TrendingMoviesDatasourceFactory trendingMoviesDatasourceFactory = new TrendingMoviesDatasourceFactory();
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(true)
+                .setInitialLoadSizeHint(20)
+                .setMaxSize(60)
+                .setPageSize(20)
+                .setPrefetchDistance(20)
+                .build();
+        return new LivePagedListBuilder<>(trendingMoviesDatasourceFactory, config).build();
     }
 
     public LiveData<PagedList<ListMovie>> getGenreMovies(int genreId) {

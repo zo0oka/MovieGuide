@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.paging.PagedListAdapter;
 
 import com.zo0okadev.movieguide.R;
 import com.zo0okadev.movieguide.model.ListMovie;
@@ -14,7 +15,7 @@ import java.util.Objects;
 
 import static com.zo0okadev.movieguide.model.ListMovie.DIFF_CALLBACK;
 
-public class MoviesPagedListAdapter extends androidx.paging.PagedListAdapter<ListMovie, ListMovieViewHolder> {
+public class MoviesPagedListAdapter extends PagedListAdapter<ListMovie, ListMovieViewHolder> {
 
     private FragmentActivity activity;
 

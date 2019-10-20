@@ -18,6 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.zo0okadev.movieguide.R;
 import com.zo0okadev.movieguide.ui.adapters.SectionsPagerAdapter;
+import com.zo0okadev.movieguide.ui.home.trendingMovies.TrendingMoviesFragment;
 import com.zo0okadev.movieguide.ui.home.tvShowsAiringToday.TvShowsAiringTodayFragment;
 import com.zo0okadev.movieguide.ui.home.nowPlayingMovies.NowPlayingMoviesFragment;
 import com.zo0okadev.movieguide.ui.home.popularMovies.PopularMoviesFragment;
@@ -76,7 +77,7 @@ public class HomeFragment extends Fragment {
         adapter.addFragment(TopRatedTvShowsFragment.newInstance(), "TOP RATED TV SHOWS");
         adapter.addFragment(NowPlayingMoviesFragment.newInstance(), "NOW PLAYING MOVIES");
         adapter.addFragment(TvShowsAiringTodayFragment.newInstance(), "TV SHOWS AIRING TODAY");
-        adapter.addFragment(TopRatedMoviesFragment.newInstance(), "TRENDING MOVIES");
+        adapter.addFragment(TrendingMoviesFragment.newInstance(), "TRENDING MOVIES");
         adapter.addFragment(TrendingTvShowsFragment.newInstance(), "TRENDING TV SHOWS");
         adapter.addFragment(UpcomingMoviesFragment.newInstance(), "UPCOMING MOVIES");
         adapter.addFragment(TvShowsOnTheAirFragment.newInstance(), "TV SHOWS ON THE AIR");

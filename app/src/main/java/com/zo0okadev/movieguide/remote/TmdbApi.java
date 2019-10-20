@@ -3,6 +3,8 @@ package com.zo0okadev.movieguide.remote;
 import com.zo0okadev.movieguide.model.reponses.GenresResponse;
 import com.zo0okadev.movieguide.model.reponses.MoviesListResonse;
 import com.zo0okadev.movieguide.model.reponses.NowPlayingMoviesResponse;
+import com.zo0okadev.movieguide.model.reponses.TrendingMoviesResponse;
+import com.zo0okadev.movieguide.model.reponses.TrendingTvShowsResponse;
 import com.zo0okadev.movieguide.model.reponses.TvShowsListResponse;
 
 import retrofit2.Call;
@@ -45,6 +47,16 @@ public interface TmdbApi {
     Call<TvShowsListResponse> getPopularTvShows(
             @Query("api_key") String apiKey,
             @Query("language") String language,
+            @Query("page") int page);
+
+    @GET("trending/movie/week")
+    Call<TrendingMoviesResponse> getTrendingMovies(
+            @Query("api_key") String apiKey,
+            @Query("page") int page);
+
+    @GET("trending/tv/week")
+    Call<TrendingTvShowsResponse> getTrendingTvShows(
+            @Query("api_key") String apiKey,
             @Query("page") int page);
 
     @GET("tv/airing_today")
